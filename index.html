@@ -7,7 +7,35 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="book-container"></div>
+      <header><h1>My Library</h1></header>
+      <p id="add"><button id="showModal">Add a new book</button></p>
+      <dialog>
+        <form action="">
+          <h2>Add a Book</h2>
+          <p>
+            <label for="title">Title: </label>
+            <input type="text" id="title" name="book_title" />
+          </p>
+          <p>
+            <label for="author">Author: </label>
+            <input type="text" id="author" name="book_author" />
+          </p>
+          <p>
+            <label for="pages">Pages </label>
+            <input type="text" id="pages" name="book_pages" />
+          </p>
+          <p>
+            <label for="read">Read: </label>
+            <input type="checkbox" id="read" name="book_read_status" />
+          </p>
+          <p>
+            <button id="confirmNewBook">Add</button>
+            <button value="cancel" formmethod="dialog">Cancel</button>
+          </p>
+        </form>
+      </dialog>
+      <div class="book-list-container"></div>
+    </div>
     <script src="app.js"></script>
   </body>
 </html>
