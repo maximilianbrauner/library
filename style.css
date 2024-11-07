@@ -8,8 +8,6 @@ html{
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
-	display: fex;
-	flex-direction: column;
   }
 header {
 	background: #d6ccc2;
@@ -64,6 +62,17 @@ dialog > p > button{
 	padding: 8px;
 }
 ::backdrop {
-	background-color: #e3d5ca;
-	opacity: 0.9;
+	background-color: grey;
+	opacity: 0.85;
   }
+.card-buttons{
+	display: flex;
+	justify-content: space-between;
+}
+.card-buttons > button{
+	border: 1px solid black;
+	border-radius: 4px;
+	padding: 4px;
+	cursor: pointer;
+	background: #f5ebe0;
+}

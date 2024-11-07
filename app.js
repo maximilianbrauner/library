@@ -11,34 +11,51 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
-Book.prototype.info = function () {
-  return `${this.title} by ${this.author} has ${this.pages} Pages, ${this.read}`;
-};
+Book.prototype.toggleRead = function () {
+  if(this.read === true){
+    this.read = false
+  }else{
+    this.read = true
+  }
+  }
+
 
 bookList = [];
 function addBookToLibrary(title, author, pages, read) {
   book = new Book(title, author, pages, read)
   bookList.push(book);
-  console.log(bookList)
   displayBooks()
 }
 
 function displayBooks() {
   bookListContainer.innerHTML = ''
-  bookList.forEach((elem) => {
+  bookList.forEach((elem, index) => {
     const displayBook = document.createElement("div");
+    displayBook.classList.add("card");
+    displayBook.setAttribute("data-index", index)
     displayBook.innerHTML += `
     <h3>Title: ${elem.title}</h3>
     <p>Author: ${elem.author}</p>
     <p>Pages: ${elem.pages}</p>
     <p>Read: ${elem.read ? "Read" : "Not Read"}</p>
+    <p class="card-buttons">
+    <button class="toggle-read-status">Read</button>
+    <button class="delete-button">Delete</button>
+    </p>
     `;
+    const deleteButton = displayBook.querySelector(".delete-button")
+    deleteButton.addEventListener('click', () => {
+      deleteBook(index)
+      displayBooks()
+    })
+    const toggleReadButton = displayBook.querySelector(".toggle-read-status")
+    toggleReadButton.addEventListener('click', () => {
+      elem.toggleRead()
+      displayBooks()
+    })
     bookListContainer.appendChild(displayBook);
-    displayBook.classList.add("card");
   });
 }
-// addBookToLibrary(theHobbit);
-// addBookToLibrary(hpOtter);
 
 addBookBtn.addEventListener('click', () => {
   dialog.showModal()
@@ -51,8 +68,10 @@ confirmNewBookBtn.addEventListener('click', (event) => {
   const bookAuthor = author.value
   const bookPages = pages.value
   const bookReadStatus = read.checked
-  console.log(`${title}`,`${author}`,`${pages}`,`${read}`)
-  addBookToLibrary(bookTitle, bookAuthor, parseInt(bookPages), bookReadStatus)
+  addBookToLibrary(bookTitle, bookAuthor, (bookPages), bookReadStatus)
   dialog.close()
 })
 
+function deleteBook(index) {
+  bookList.splice(index, 1)
+}
